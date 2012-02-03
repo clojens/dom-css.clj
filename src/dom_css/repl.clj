@@ -5,4 +5,7 @@
     [clojure.string]
     [clojure.tools.logging])
   (:use
-    [dom-css.core]))
+    [dom-css.core]
+    [auto-reload.core :only [auto-reload]]))
+
+(auto-reload ["src"])
