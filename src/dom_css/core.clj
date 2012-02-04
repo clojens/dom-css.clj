@@ -23,8 +23,7 @@
   could for example be used to provide dynamically generated stylesheets."
   {:author "Naitik Shah"}
   (:require
-    [clojure.string]
-    [clojure.tools.logging])
+    [clojure.string])
   (:use
     [hdom.core :only [reduce-elements]]))
 
