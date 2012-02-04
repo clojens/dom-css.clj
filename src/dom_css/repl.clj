@@ -1,11 +1,11 @@
 (ns dom-css.repl
-  "dom-css repl helpers"
+  "repl helpers"
   {:author "Naitik Shah"}
   (:require
+    [auto-reload.core :only [auto-reload]]
     [clojure.string]
     [clojure.tools.logging])
   (:use
-    [dom-css.core]
-    [auto-reload.core :only [auto-reload]]))
+    [dom-css.core]))
 
-(auto-reload ["src"])
+(auto-reload.core/auto-reload ["src"])
