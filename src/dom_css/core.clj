@@ -1,5 +1,9 @@
 (ns dom-css.core
-  "Extract and inline CSS from hiccup data. This allows for style data to live
+  "<a href='http://travis-ci.org/nshah/dom-css.clj'>
+  <img src='https://secure.travis-ci.org/nshah/dom-css.clj.png'>
+  </a>
+
+  Extract and inline CSS from hiccup data. This allows for style data to live
   close to the markup itself, and works especially well with
   [cssgen](https://github.com/paraseba/cssgen).
 
