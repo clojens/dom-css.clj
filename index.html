@@ -3028,102 +3028,8 @@ net.brehaut.ClojureTools = (function (SH) {
     build_tree: build_tree
   };
 })(SyntaxHighlighter);
-</script><script type="text/javascript">
-// hackity-hack
-
-$(document).ready(function() {
-    var ft = $("#floating-toc")
-    var ul = ft.find('ul')
-    var lis = ft.find('li')
-
-    ul.css('maring', '0px')
-
-    var liHeight = $(lis.get(0)).height()
-
-    ft.css('height', (liHeight) + 'px')
-
-
-    showNs = function(ns) {
-        //this is killing performance, lookup table.
-        //var el = $("[id='floating-toc_" + ns + "']")
-        //var index = lis.index(el)
-
-        var index = 0
-
-        for(i in nsPositions.nss) {
-            if(ns == nsPositions.nss[i]) index = i
-        }
-
-        console.log(index)
-
-        if(index == lastNsIndex) return;
-
-        lastNsIndex = index
-
-
-        ul.animate({marginTop: (-1 * liHeight * index) + 'px'},
-               300)
-        //        ul.css('margin-top', (-1 * liHeight * index) + 'px')
-
-    }
-
-    var calcNsPositions = function() {
-        var nss = []
-        var anchors = []
-        var positions = []
-        $.each(lis, function(i, el) {
-            var ns = $(el).attr('id').split('_')[1]
-            nss.push(ns)
-            var a = $("a[name='"+ns+"']")
-            anchors.push(a)
-            positions.push(a.offset().top)
-            console.log(a.offset().top)
-        });
-
-        return {nss: nss, positions: positions}
-    }
-
-    var nsPositions = calcNsPositions()
-
-    console.log(nsPositions)
-
-    var lastNsIndex = -1
-
-    var $window = $(window)
-
-    var currentSection = function(nsp) {
-
-        var ps = nsp.positions
-        var nss = nsp.nss
-        var scroll = $window.scrollTop() + 300
-        var nsIndex = -1
-        for(var i in ps) {
-            var p = ps[i]
-            if(p >= scroll) {
-                nsIndex = i-1
-                break;
-            }
-                
-        }
-
-        if(nsIndex == -1 && scroll >= ps[0]) {
-            nsIndex = ps.length-1
-        }
-
-        if(nsIndex == -1) nsIndex = 0
-
-        return nss[nsIndex]
-    }
-
-    $(window).scroll(function(e) {
-        showNs(currentSection(nsPositions))
-    })
-
-    ul.css('margin-top', '0px')
-
-})
-</script><title>dom-css -- Marginalia</title></head><body><table><tr><td class="docs"><div class="header"><h1 class="project-name">dom-css</h1><h2 class="project-version">1.0.2</h2><br /><p>Inline CSS from hiccup data.</p>
-</div><div class="dependencies"><h3>dependencies</h3><table><tr><td class="dep-name">hdom</td><td class="dotted"><hr /></td><td class="dep-version">1.0.2</td></tr><tr><td class="dep-name">org.clojure/clojure</td><td class="dotted"><hr /></td><td class="dep-version">1.3.0</td></tr></table></div><div class="dependencies"><h3>dev dependencies</h3><table><tr><td class="dep-name">auto-reload</td><td class="dotted"><hr /></td><td class="dep-version">1.0.3</td></tr><tr><td class="dep-name">lein-marginalia</td><td class="dotted"><hr /></td><td class="dep-version">0.7.0-SNAPSHOT</td></tr><tr><td class="dep-name">org.clojure/tools.logging</td><td class="dotted"><hr /></td><td class="dep-version">0.2.3</td></tr><tr><td class="dep-name">vimclojure/server</td><td class="dotted"><hr /></td><td class="dep-version">2.3.0-SNAPSHOT</td></tr></table></div></td><td class="codes" style="text-align: center; vertical-align: middle;color: #666;padding-right:20px"><br /><br /><br />(this space intentionally left almost blank)</td></tr><tr><td class="docs"><div class="toc"><a name="toc"><h3>namespaces</h3></a><ul><li><a href="#dom-css.core">dom-css.core</a></li><li><a href="#dom-css.repl">dom-css.repl</a></li></ul></div></td><td class="codes">&nbsp;</td></tr><tr><td class="docs"><div class="docs-header"><a class="anchor" href="#dom-css.core" name="dom-css.core"><h1 class="project-name">dom-css.core</h1><a class="toc-link" href="#toc">toc</a></a></div></td><td class="codes" /></tr><tr><td class="docs"><p><a href='http://travis-ci.org/nshah/dom-css.clj'>
+</script><title>dom-css -- Marginalia</title></head><body><table><tr><td class="docs"><div class="header"><h1 class="project-name">dom-css</h1><h2 class="project-version">1.0.3</h2><br /><p>Inline CSS from hiccup data.</p>
+</div><div class="dependencies"><h3>dependencies</h3><table><tr><td class="dep-name">hdom</td><td class="dotted"><hr /></td><td class="dep-version">1.0.2</td></tr><tr><td class="dep-name">org.clojure/clojure</td><td class="dotted"><hr /></td><td class="dep-version">1.3.0</td></tr></table></div></td><td class="codes" style="text-align: center; vertical-align: middle;color: #666;padding-right:20px"><br /><br /><br />(this space intentionally left almost blank)</td></tr><tr><td class="docs"><div class="toc"><a name="toc"><h3>namespaces</h3></a><ul><li><a href="#dom-css.core">dom-css.core</a></li></ul></div></td><td class="codes">&nbsp;</td></tr><tr><td class="docs"><div class="docs-header"><a class="anchor" href="#dom-css.core" name="dom-css.core"><h1 class="project-name">dom-css.core</h1><a class="toc-link" href="#toc">toc</a></a></div></td><td class="codes" /></tr><tr><td class="docs"><p><a href='http://travis-ci.org/nshah/dom-css.clj'>
   <img src='https://secure.travis-ci.org/nshah/dom-css.clj.png'>
   </a></p>
 
@@ -3183,14 +3089,5 @@ lein repl
 </td><td class="codes"><pre class="brush: clojure">(defn inline
   [body]
   (let [[css new-body] (extract body)]
-    (cons [:style (minify (apply str css))] new-body)))</pre></td></tr><tr><td class="spacer docs">&nbsp;</td><td class="codes" /></tr><tr><td class="docs"><div class="docs-header"><a class="anchor" href="#dom-css.repl" name="dom-css.repl"><h1 class="project-name">dom-css.repl</h1><a class="toc-link" href="#toc">toc</a></a></div></td><td class="codes" /></tr><tr><td class="docs"><p>repl helpers</p>
-</td><td class="codes"><pre class="brush: clojure">(ns dom-css.repl
-  {:author &quot;Naitik Shah&quot;}
-  (:require
-    [auto-reload.core :only [auto-reload]]
-    [clojure.string]
-    [clojure.tools.logging])
-  (:use
-    [dom-css.core]))</pre></td></tr><tr><td class="docs">
-</td><td class="codes"><pre class="brush: clojure">(auto-reload.core/auto-reload [&quot;src&quot;])</pre></td></tr><tr><td class="spacer docs">&nbsp;</td><td class="codes" /></tr></table><div class="footer">Generated by <a href="https://github.com/fogus/marginalia">Marginalia</a>.&nbsp;&nbsp;Syntax highlighting provided by Alex Gorbatchev's <a href="http://alexgorbatchev.com/SyntaxHighlighter/">SyntaxHighlighter</a><div id="floating-toc"><ul><li class="floating-toc-li" id="floating-toc_dom-css.core">dom-css.core</li><li class="floating-toc-li" id="floating-toc_dom-css.repl">dom-css.repl</li></ul></div></div><script type="text/javascript">SyntaxHighlighter.defaults['gutter'] = false;
+    (cons [:style (minify (apply str css))] new-body)))</pre></td></tr><tr><td class="spacer docs">&nbsp;</td><td class="codes" /></tr></table><div class="footer">Generated by <a href="https://github.com/fogus/marginalia">Marginalia</a>.&nbsp;&nbsp;Syntax highlighting provided by Alex Gorbatchev's <a href="http://alexgorbatchev.com/SyntaxHighlighter/">SyntaxHighlighter</a></div><script type="text/javascript">SyntaxHighlighter.defaults['gutter'] = false;
        SyntaxHighlighter.all()</script></body></html>
